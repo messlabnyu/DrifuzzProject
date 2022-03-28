@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO:=~/DrifuzzRepo
+REPO=$HOME/DrifuzzRepo
 NP=$(nproc)
 
 mkdir -p ${REPO}
@@ -35,12 +35,17 @@ panda/scripts/install_ubuntu.sh)
 (cd ${REPO}/Drifuzz && \
 ./compile.sh --build-module)
 
+
+# Build the image for the first time
+(cd ${REPO}/Drifuzz && \
+./compile.sh --build-image)
+
 # Download and copy linux firmware
 git clone --depth 1 https://github.com/wkennington/linux-firmware.git ${REPO}/linux-firmware
 (cd ${REPO}/Drifuzz/image/chroot && \
     mkdir -p lib/firmware && \
 cp -r ${REPO}/linux-firmware/* lib/firmware)
 
-# Build qcow image
+# Build qcow image again with firmware
 (cd ${REPO}/Drifuzz && \
 ./compile.sh --build-image)
