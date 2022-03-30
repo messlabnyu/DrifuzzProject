@@ -1,0 +1,5 @@
+pycparser
+
+#pyPanda
+colorama 
+cffi>1.14.3
