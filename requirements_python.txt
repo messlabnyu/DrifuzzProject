@@ -1,5 +1,12 @@
-pycparser
-
-#pyPanda
-colorama 
 cffi>1.14.3
+colorama
+intervaltree==3.1.0
+lz4
+mmh3
+pexpect
+psutil
+pycparser
+shortuuid
+sysv_ipc
+tempdir
+wheel

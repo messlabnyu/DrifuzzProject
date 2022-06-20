@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO=$HOME/DrifuzzRepo1
+REPO=$HOME/DrifuzzRepo
 NP=$(nproc)
 
 mkdir -p ${REPO}
@@ -17,12 +17,6 @@ PANDA_GIT="https://github.com/panda-re/panda.git"
 PANDA_PPA="ppa:phulin/panda"
 LIBDWARF_GIT="git://git.code.sf.net/p/libdwarf/code"
 UBUNTU_FALLBACK="xenial"
-
-# system information
-vendor=$(lsb_release --id | awk -F':[\t ]+' '{print $2}')
-codename=$(lsb_release --codename | awk -F':[\t ]+' '{print $2}')
-version=$(lsb_release -r| awk '{print $2}' | awk -F'.' '{print $1}')
-arch=$(uname -m)
 
 progress() {
   echo
@@ -51,6 +45,13 @@ apt_enable_src
 
 progress "Installing qemu dependencies..."
 sudo apt-get update || true
+sudo apt-get install -y lsb-core
+# system information
+vendor=$(lsb_release --id | awk -F':[\t ]+' '{print $2}')
+codename=$(lsb_release --codename | awk -F':[\t ]+' '{print $2}')
+version=$(lsb_release -r| awk '{print $2}' | awk -F'.' '{print $1}')
+arch=$(uname -m)
+
 if [ "$version" -le "19" ]; then
   sudo apt-get -y build-dep qemu
 fi
@@ -59,7 +60,7 @@ progress "Installing PANDA dependencies..."
 sudo apt-get -y install --no-install-recommends $(cat requirements_debian.txt | grep -o '^[^#]*')
 
 python3 -m venv ./drifuzz_env
-source ./drifuzz/bin/activate
+source ./drifuzz_env/bin/activate
 python3 -m pip install -r requirements_python.txt
 
 pushd /tmp
