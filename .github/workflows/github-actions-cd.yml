@@ -1,0 +1,17 @@
+name: DrifuzzDocker
+on:
+  push:
+    branches:
+      - main
+jobs:
+  publish:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u buszk --password-stdin
+      - run: docker create --name drifuzz --privileged -it ubuntu:20.04
+      - run: docker start drifuzz
+      - run: docker exec -i drifuzz /bin/bash < ${{ github.workspace }}/docker_script.sh
+      - run: docker commit drifuzz buszk/drifuzz-docker:latest
+      - run: docker push buszk/drifuzz-docker:latest
