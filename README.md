@@ -9,6 +9,8 @@ The Drifuzz project contains three major repositories: fuzzing related code, cus
 ```bash
 git clone https://github.com/messlabnyu/DrifuzzProject.git
 cd DrifuzzProject && ./build.sh 2>&1 |tee build.log
+# Activate python env
+source ./drifuzz_env/bin/activate
 ```
 
 ## How to run
