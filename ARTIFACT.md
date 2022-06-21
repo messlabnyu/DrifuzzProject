@@ -12,7 +12,8 @@ Our artifact includes three major parts: hardware-free device driver fuzzer, mod
 
 ## Description
 ### How to access
-Clone from https://github.com/messlabnyu/DrifuzzProject/
+Clone source from https://github.com/messlabnyu/DrifuzzProject/.
+Obtain docker image from https://hub.docker.com/repository/docker/buszk/drifuzz-docker.
 ### Hardware Dependencies
 64-bit x86 machine.
 ### Software Dependencies

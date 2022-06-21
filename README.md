@@ -4,6 +4,7 @@
 Peripheral hardware in modern computers is typically assumed to be secure and not malicous, and device drivers are implemented in a way that trusts inputs from hardware. In this project, we propose a hardware-free concolic-augmented fuzzer and a technique for generating high-quality initial seeds.
 
 ## How to build
+### Installation
 The Drifuzz project contains three major repositories: fuzzing related code, custom PANDA, concolic exploration scripts. The build script in this repository helps download them to `~/DrifuzzRepo`. The script is tested in Ubuntu 20, and Ubuntu 21 could be supported with [the patch](https://github.com/buszk/Drifuzz/blob/dev/ubuntu_21.patch).
 
 ```bash
@@ -11,6 +12,13 @@ git clone https://github.com/messlabnyu/DrifuzzProject.git
 cd DrifuzzProject && ./build.sh 2>&1 |tee build.log
 # Activate python env
 source ./drifuzz_env/bin/activate
+```
+### Docker alternative
+If you wish to skip installation, we conveniently provide a docker image. You must start the container with `--privileged` flag for QEMU-KVM to work.
+```bash
+docker run -it --privileged buszk/drifuzz-docker
+# Inside docker
+source /DrifuzzProject/drifuzz_env/bin/activate
 ```
 
 ## How to run
