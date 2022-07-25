@@ -5,6 +5,7 @@ build-essential
 chrpath
 clang-11
 curl
+debian-archive-keyring
 debootstrap
 fakeroot
 flex
